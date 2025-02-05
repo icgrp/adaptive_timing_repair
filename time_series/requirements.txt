@@ -1,0 +1,7 @@
+
+### B. requirements.txt
+
+```plaintext
+matplotlib
+numpy
+pandas
