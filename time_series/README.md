@@ -5,7 +5,9 @@ This project simulates a time-series repository for an FPGA. The FPGA is modeled
 - 4 6-LUTs
 - 4 5-LUTs
 - 4 pips (representing interconnect delays)
-
+- 
+  **(Will later replace using VTR database)**
+  
 The repository is implemented using SQLite for the static device information and time-series measurements. The code generates synthetic measurement data over time, exports CSV files for each measurement timestamp, and plots a 2D heatmap showing regions with different average delays.
 
 ## Setup
