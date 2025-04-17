@@ -1,0 +1,29 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"2.0",
+   "Default View_TopLeft":"-90,-166",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_psincdec -pg 1 -lvl 0 -x -40 -y -160 -defaultsOSRD
+preplace port port-id_psen -pg 1 -lvl 0 -x -40 -y -140 -defaultsOSRD
+preplace port port-id_reset -pg 1 -lvl 0 -x -40 -y -120 -defaultsOSRD
+preplace port port-id_clk_in1 -pg 1 -lvl 0 -x -40 -y -100 -defaultsOSRD
+preplace port port-id_locked -pg 1 -lvl 2 -x 250 -y -160 -defaultsOSRD
+preplace port port-id_psdone -pg 1 -lvl 2 -x 250 -y -140 -defaultsOSRD
+preplace port port-id_clk_out2 -pg 1 -lvl 2 -x 250 -y -120 -defaultsOSRD
+preplace port port-id_clk_out1 -pg 1 -lvl 2 -x 250 -y -100 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 1 -x 100 -y -80 -defaultsOSRD
+preplace netloc psincdec_1 1 0 1 -10 -160n
+preplace netloc psen_1 1 0 1 -20 -140n
+preplace netloc reset_1 1 0 1 N -120
+preplace netloc clk_in1_1 1 0 1 N -100
+preplace netloc clk_wiz_0_locked 1 1 1 200 -160n
+preplace netloc clk_wiz_0_psdone 1 1 1 220 -140n
+preplace netloc clk_wiz_0_clk_out2 1 1 1 230 -120n
+preplace netloc clk_wiz_0_clk_out1 1 0 2 0 20 210
+levelinfo -pg 1 -40 100 250
+pagesize -pg 1 -db -bbox -sgen -160 -180 360 140
+"
+}
+
