@@ -57,7 +57,6 @@ if {$::dispatch::connected} {
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param checkpoint.writeSynthRtdsInDcp 1
-set_param synth.incrementalSynthesisCache ./.Xil/Vivado-2444860-eiffel-ubuntu/incrSyn
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
@@ -78,6 +77,7 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
   /home/eiffel/adaptive_timing_repair/src/CUT_1.v
+  /home/eiffel/adaptive_timing_repair/src/smith_waterman_hw.v
   /home/eiffel/adaptive_timing_repair/src/uart.v
   /home/eiffel/adaptive_timing_repair/src/ddfl.v
 }
@@ -105,6 +105,8 @@ set_property used_in_implementation false [get_files /home/eiffel/adaptive_timin
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental /home/eiffel/adaptive_timing_repair/project_1/project_1.srcs/utils_1/imports/synth_1/top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

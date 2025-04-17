@@ -45,6 +45,13 @@ module top (
            output wire tx
            );
            
+           localparam integer MAX_LEN1    = 64;
+           localparam integer MAX_LEN2    = 64;
+           localparam integer DATA_WIDTH  = 8;
+           localparam integer SCORE_WIDTH = 16;
+           localparam integer LEN_W1 = 7;
+           localparam integer LEN_W2 = 7;
+           
            wire normal_clk;
            wire fast_clk;
            wire locked;
@@ -94,6 +101,9 @@ module top (
                 .clear_diff(clear_diff),
                 .diff(diff));
                 
+              
+               
+                
             //*********************************************************//
             // ****************Finite State Machine*******************//
             //********************************************************//
@@ -106,8 +116,49 @@ module top (
             localparam WRITE_CONTROL = 5'd5;
             localparam UART_SIGNAL_SELECT = 5'd6;
             localparam UART_DONE = 5'd7;
+            
+            
+             // Example sequences "ACGT" vs "AGT"
+            wire [DATA_WIDTH*MAX_LEN1-1:0] seq1_flat = str_to_flat("ACGT");
+            wire [DATA_WIDTH*MAX_LEN2-1:0] seq2_flat = str_to_flat("AGT ");
+            wire [LEN_W1-1:0] len1_buf = 4;  // actual length in symbols
+            wire [LEN_W2-1:0] len2_buf = 3;
+
+            // Core outputs
+            wire                       sw_busy;
+            wire                       sw_done;
+            wire                       sw_valid;
+            wire [SCORE_WIDTH-1:0]     sw_score;
+            wire [LEN_W1-1:0]          sw_i;
+            wire [LEN_W2-1:0]          sw_j;
+            wire [7:0]                 sw_led;
+
+ 
              
-            //BITS_SELECT
+          
+             smith_waterman_affine_refined #(
+                    .MAX_LEN1(64),
+                    .MAX_LEN2(64),
+                    .DATA_WIDTH(8),
+                    .SCORE_WIDTH(16)
+                ) sw_inst (
+                    .clk            (normal_clk),           // from clockgen
+                    .rst_n          (~reset),               // active-low reset
+                    .start          (state == RUN),         // pulse to launch alignment
+                    .seq1_flat      (seq1_flat),
+                    .len1           (len1_buf),             // your actual length
+                    .seq2_flat      (seq2_flat),
+                    .len2           (len2_buf),
+                    .busy           (sw_busy),
+                    .done           (sw_done),
+                    .valid_out      (sw_valid),
+                    .max_score_out  (sw_score),
+                    .max_pos_i_out  (sw_i),
+                    .max_pos_j_out  (sw_j),
+                    .led_max_score  (sw_led)
+                               //BITS_SELECT
+                               
+                      );
             
             localparam UPPER = 1'd0;
             localparam LOWER = 1'd1;
